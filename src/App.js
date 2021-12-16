@@ -16,6 +16,7 @@ function App() {
           <Route exact path='/profil' element={<Profil/>}/>
           <Route exact path='/cart' element={<Cart/>}/>
           <Route exact path='/login' element={<Login/>}/>
+          <Route exact path='/' element={<Login/>}/>
         </Routes>
   </Router>
   );

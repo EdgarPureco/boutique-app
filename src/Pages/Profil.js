@@ -2,7 +2,6 @@ import React from "react";
 
 import * as Boot from "react-bootstrap";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import '../firebase'
 import db from '../firebase';
 
 import Navbar from "../Components/Navbar";
@@ -47,32 +46,21 @@ class Home extends React.Component{
             }
                 
         }
-        
-        var user = localStorage.getItem('user');
-        //Requete pour obtenir la reference de l'utilisateur dans la base de données
-        const query = db.collection('user').doc(user);
-        query.get().then((docSnapshot) => {
 
-            //Si l'utilisateur exist cette requete recupere les données et les sauvegarde dans un tableau
-            if (docSnapshot.exists) {
-               query.onSnapshot((doc) => {
-                    var password = doc.get('password');
-                    var name = doc.get('name');
-                    var lastName = doc.get('lastName');
-                    var data = [];
-                    data.push(password);
-                    data.push(name);
-                    data.push(lastName);
-                    //Sauvegarder le tableau dans le local storage
-                    localStorage.setItem('data', data);
-                  });
-                }else{
-                    window.location.assign('/register');
-                }
-        });
+        var user = localStorage.getItem('user');
 
         //Recuperer le tableau
         var text = localStorage.getItem('data');
+        if(text==null){
+            return (
+                <>
+                <Navbar></Navbar>
+            <br></br>
+                <Boot.Container className="container p-4">
+                    <Boot.Container className="row"/>
+                    <Boot.Container className="cargando"/>
+                </Boot.Container></>);
+        }else{
         //Diviser les differents attributs du tableau pour les afficher dans les input text comme placeholder
         const data = text.split(",");
         return(
@@ -102,7 +90,7 @@ class Home extends React.Component{
     
             </Boot.Container>
             </>
-        );
+        );}
     }
     
     

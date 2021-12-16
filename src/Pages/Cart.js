@@ -95,7 +95,7 @@ class Cart extends React.Component{
                         <Boot.Card.Body>
                             <h1>{p.name}</h1>
                             <Boot.Card.Text>
-                            Quantity: {p.quantity}
+                            Quantity:  <input type="number" min="1" max="100" placeholder={p.quantity}></input>
                             </Boot.Card.Text>
                             <Boot.Card.Title align="right">Price: $ {p.price}</Boot.Card.Title>
                             <RemoveFromCart id={p.id}></RemoveFromCart>
